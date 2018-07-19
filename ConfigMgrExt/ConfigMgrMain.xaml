@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="ConfigMgrExt.ConfigMgrMain"
+             x:Name="FrmMain"
+             Loaded="FrmMain_Loaded"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ConfigMgrExt"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <StackPanel>
+            <!--Defining the Header of the Extention-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="ConfigMgr Easy Script" Margin="5" FontSize="16" FontWeight="Bold"/>
+                <Label Grid.Column="1" Content="SiteServer:" Margin="5" FontSize="16" MinWidth="100"/>
+                <TextBox x:Name="TxtSiteServer" Grid.Column="2" Margin="5" FontSize="16" VerticalAlignment="Center" KeyDown="TxtSiteServer_KeyDown" Text="winsrv2016pri" TextChanged="TxtSiteServer_TextChanged"/>
+                <Button x:Name="BtnConnect" Grid.Column="3" Margin="5" Content="Connect" Click="BtnConnect_Click"/>
+            </Grid>
+            <!--Defining the Tabs for each Topic / Not final yet-->
+            <TabControl x:Name="TabMenu" IsEnabled="false" Height="500">
+                <TabItem Header="General Informations">
+                    <!--Contextmenu for General Tab-->
+                    <TabItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="General">
+                                <MenuItem Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgrCmdLet" />
+                                <MenuItem Header="Query Site Code WMI-Only" Click="MenuSiteCode_WMIOnly" />
+                                <MenuItem Header="Query Site Code CmdLet"/>
+                            </MenuItem>
+                        </ContextMenu>
+                    </TabItem.ContextMenu>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100*"/>
+                                <ColumnDefinition Width="250*"/>
+                                <ColumnDefinition Width="400*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="SiteServer:" Margin="5" />
+                            <TextBlock Grid.Column="1" Text="{Binding ElementName=TxtSiteServer, Path=Text}" Margin="5,10" FontWeight="Bold" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="SiteCode:" Margin="5" />
+                            <TextBlock Grid.Column="1" x:Name="txtblcSiteCode" Margin="5" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="85"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Logging:" Margin="5"/>
+                            <TextBox Grid.Column="1" x:Name="txtLogging" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="5" Height="300"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Applications" x:Name="TabApplication">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="txtApplicationFilter" Margin="5" />
+                            <Button Grid.Column="1" x:Name="BtnApplyApplicationFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="730*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdApplication" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MaxHeight="250" />
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Collections" x:Name="TabCollection">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="txtCollectionFilter" Margin="5" />
+                            <Button Grid.Column="1" x:Name="BtnApplyCollectionFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdCollection" SelectionMode="Single" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250" />
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Packages" x:Name="TabPackage" >
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="731*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdPackage" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Software Updates">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="txtSoftwareupdateFilter" Margin="5" />
+                            <Button Grid.Column="1" x:Name="BtnApplySoftwareupdateFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="730*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdSoftwareupdate" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Tasksequences">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="730*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdTasksequence" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Grid>
+</UserControl>
