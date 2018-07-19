@@ -17,6 +17,7 @@ namespace ConfigMgrExt
 {
     /// <summary>
     /// Interaction logic for ConfigMgrMain.xaml
+    /// Branch
     /// </summary>
     public partial class ConfigMgrMain : System.Windows.Controls.UserControl, IAddOnToolHostObject
     {
