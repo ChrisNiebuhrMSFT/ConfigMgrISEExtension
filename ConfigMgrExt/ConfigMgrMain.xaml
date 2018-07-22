@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ConfigMgrExt"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600">
+             d:DesignHeight="350" d:DesignWidth="600">
     <Grid>
         <StackPanel>
             <!--Defining the Header of the Extention-->
@@ -24,15 +24,15 @@
                 <Button x:Name="BtnConnect" Grid.Column="3" Margin="5" Content="Connect" Click="BtnConnect_Click"/>
             </Grid>
             <!--Defining the Tabs for each Topic / Not final yet-->
-            <TabControl x:Name="TabMenu" IsEnabled="false" Height="500">
+            <TabControl x:Name="TabMenu" IsEnabled="false" Height="300">
                 <TabItem Header="General Informations">
                     <!--Contextmenu for General Tab-->
                     <TabItem.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="General">
-                                <MenuItem Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgrCmdLet" />
+                                <MenuItem Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
                                 <MenuItem Header="Query Site Code WMI-Only" Click="MenuSiteCode_WMIOnly" />
-                                <MenuItem Header="Query Site Code CmdLet"/>
+                                <MenuItem Header="Query Site Code CmdLet" Click="MenuSiteCode_CmdLet"/>
                             </MenuItem>
                         </ContextMenu>
                     </TabItem.ContextMenu>
@@ -60,7 +60,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Logging:" Margin="5"/>
-                            <TextBox Grid.Column="1" x:Name="txtLogging" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="5" Height="300"/>
+                            <TextBox Grid.Column="1" x:Name="txtLogging" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="5" Height="180"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -79,7 +79,14 @@
                                 <ColumnDefinition Width="35*"/>
                                 <ColumnDefinition Width="730*"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdApplication" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MaxHeight="250" />
+                            <DataGrid x:Name ="grdApplication" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MaxHeight="250">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem x:Name="CtxQueryApplicationWMI" Header="Query Application WMI-Only" Click="Query_Application"/>
+                                        <MenuItem x:Name="CtxQueryApplicationCmdlet" Header="Query Application CmdLet" Click="Query_Application"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                            </DataGrid>
                         </Grid>
                     </StackPanel>
                 </TabItem>

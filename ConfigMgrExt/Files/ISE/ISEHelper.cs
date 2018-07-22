@@ -22,11 +22,15 @@ namespace ConfigMgrExt.ISE
         {
             try
             {
-                var lineCount = hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.LineCount;
-                hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.SetCaretPosition(lineCount, hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.GetLineLength(lineCount) + 1);
-                hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.InsertText("\n" + command);
-                lineCount = hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.LineCount;
-                hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.SetCaretPosition(lineCount, 1);
+                var lineRow = hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.CaretLine;
+                var lineColumn = hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.CaretColumn;
+                var lineCountStart = hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.LineCount;
+              
+                hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.SetCaretPosition(lineRow, 1);
+                hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.InsertText( command + "\n");
+                var lineCountEnd = hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.LineCount;
+                var offset = lineCountEnd - lineCountStart;
+                hostObject.CurrentPowerShellTab.Files.SelectedFile.Editor.SetCaretPosition(lineRow + offset, 1);
             }
             catch (Exception ex)
             {

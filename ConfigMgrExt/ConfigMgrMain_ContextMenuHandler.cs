@@ -1,5 +1,7 @@
-﻿using ConfigMgrExt.ISE;
+﻿using ConfigMgrExt.CMInfoClass;
+using ConfigMgrExt.ISE;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ConfigMgrExt
 {
@@ -14,10 +16,40 @@ namespace ConfigMgrExt
             ISEHelper.AddLine(HostObject, $"$siteCode = Get-WmiObject -Namespace root\\sms -Class SMS_ProviderLocation -ComputerName '{TxtSiteServer.Text}' -Filter \"ProviderForLocalSite=1\" |Select-Object -ExpandProperty SiteCode");
         }
 
-        private void MenuConfigMgrCmdLet(object sender, RoutedEventArgs e)
+        private void MenuConfigMgr_CmdLet(object sender, RoutedEventArgs e)
         {
             _logger.WriteLog("ConfigMgr Cmdlet Module Template was used");
             ISEHelper.AddLine(HostObject, "If(-not(Get-Module ConfigurationManager))\n{\n\tImport-Module \"$($ENV:SMS_ADMIN_UI_PATH)\\..\\ConfigurationManager.psd1\"\n}\nSet-Location \"" + txtblcSiteCode.Text + ":\"");
         }
+
+        private void MenuSiteCode_CmdLet(object sender, RoutedEventArgs e)
+        {
+            _logger.WriteLog("Query SiteCode with ConfigMgr Cmdlet Template was used");
+            ISEHelper.AddLine(HostObject, "$siteCode = Get-CMSite | Select-Object -ExpandProperty SiteCode");
+        }
+
+        private void Query_Application(object sender, RoutedEventArgs e)
+        {
+            var tmpObject = (MenuItem)sender;
+            var application = (CMApplication)grdApplication.SelectedItem;
+
+            switch (tmpObject.Name)
+            {
+                case "CtxQueryApplicationWMI":
+                    {
+                        _logger.WriteLog("Query Application WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"$app = Get-WmiObject -Namespace root\\sms\\site_{txtblcSiteCode.Text} -Class SMS_ApplicationLatest -Filter \"LocalizedDisplayname='{application.LocalizedDisplayname}'\" -ComputerName {TxtSiteServer.Text}");
+                        break;
+                    }
+                case "CtxQueryApplicationCmdlet":
+                    {
+                        _logger.WriteLog("Query Application with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"$app = Get-CMApplication -Name '{application.LocalizedDisplayname}'");
+                        break;
+                    }
+            }
+        }
+
     }
 }
+
