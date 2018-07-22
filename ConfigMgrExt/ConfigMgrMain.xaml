@@ -8,6 +8,16 @@
              xmlns:local="clr-namespace:ConfigMgrExt"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="600">
+    <UserControl.Resources>
+        <!--Using grdStyle for all Datagrids-->
+        <Style x:Key="grdStyle" TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+            <Setter Property="MaxHeight" Value="250" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <!--Defining the Header of the Extention-->
@@ -31,8 +41,12 @@
                         <ContextMenu>
                             <MenuItem Header="General">
                                 <MenuItem Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
-                                <MenuItem Header="Query Site Code WMI-Only" Click="MenuSiteCode_WMIOnly" />
-                                <MenuItem Header="Query Site Code CmdLet" Click="MenuSiteCode_CmdLet"/>
+                            </MenuItem>
+                            <MenuItem Header="WMI-Only">
+                                <MenuItem  x:Name="CtxQuerySiteCodeWMI" Header="Query Site Code" Click="MenuQuery_SiteCode" />
+                            </MenuItem>
+                            <MenuItem Header="CmdLets">
+                                <MenuItem x:Name ="CtxQuerySiteCodeCmdlet" Header="Query Site Code" Click="MenuQuery_SiteCode"/>
                             </MenuItem>
                         </ContextMenu>
                     </TabItem.ContextMenu>
@@ -64,6 +78,7 @@
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <!--Application Tab-->
                 <TabItem Header="Applications" x:Name="TabApplication">
                     <StackPanel>
                         <Grid>
@@ -79,17 +94,18 @@
                                 <ColumnDefinition Width="35*"/>
                                 <ColumnDefinition Width="730*"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdApplication" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MaxHeight="250">
+                            <DataGrid x:Name ="grdApplication" Style="{StaticResource grdStyle}">
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem x:Name="CtxQueryApplicationWMI" Header="Query Application WMI-Only" Click="Query_Application"/>
-                                        <MenuItem x:Name="CtxQueryApplicationCmdlet" Header="Query Application CmdLet" Click="Query_Application"/>
+                                        <MenuItem x:Name="CtxQueryApplicationWMI_fast" Header="Query Application WMI-Only (fast)" Click="Query_Application"/>
+                                        <MenuItem x:Name="CtxQueryApplicationCmdlet_fast" Header="Query Application CmdLet (fast)" Click="Query_Application"/>
                                     </ContextMenu>
                                 </DataGrid.ContextMenu>
                             </DataGrid>
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <!--Collections Tab-->
                 <TabItem Header="Collections" x:Name="TabCollection">
                     <StackPanel>
                         <Grid>
@@ -111,10 +127,11 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdCollection" SelectionMode="Single" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250" />
+                            <DataGrid x:Name ="grdCollection" SelectionMode="Single" Style="{StaticResource grdStyle}" />
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <!--Packages Tab-->
                 <TabItem Header="Packages" x:Name="TabPackage" >
                     <StackPanel>
                         <Grid>
@@ -122,10 +139,11 @@
                                 <ColumnDefinition Width="35*"/>
                                 <ColumnDefinition Width="731*"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdPackage" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250"/>
+                            <DataGrid x:Name ="grdPackage" Style="{StaticResource grdStyle}"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <!--Softwareupdates Tab-->
                 <TabItem Header="Software Updates">
                     <StackPanel>
                         <Grid>
@@ -141,10 +159,11 @@
                                 <ColumnDefinition Width="35*"/>
                                 <ColumnDefinition Width="730*"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdSoftwareupdate" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250"/>
+                            <DataGrid x:Name ="grdSoftwareupdate" Style="{StaticResource grdStyle}"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <!--Tasksequences Tab-->
                 <TabItem Header="Tasksequences">
                     <StackPanel>
                         <Grid>
@@ -152,7 +171,7 @@
                                 <ColumnDefinition Width="35*"/>
                                 <ColumnDefinition Width="730*"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdTasksequence" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"  MaxHeight="250"/>
+                            <DataGrid x:Name ="grdTasksequence" Style="{StaticResource grdStyle}"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
