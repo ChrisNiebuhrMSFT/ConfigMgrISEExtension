@@ -1,3 +1,3 @@
 # Introduction
-ConfigMgr Extension for Powershell ISE Testbranching
+ConfigMgr Extension for Powershell ISE
 
