@@ -1,5 +1,6 @@
 ﻿using ConfigMgrExt.CMInfoClass;
 using ConfigMgrExt.ISE;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,7 +36,15 @@ namespace ConfigMgrExt
         private void MenuConfigMgr_CmdLet(object sender, RoutedEventArgs e)
         {
             _logger.WriteLog("ConfigMgr Cmdlet Module Template was used");
-            ISEHelper.AddLine(HostObject, "If(-not(Get-Module ConfigurationManager))\n{\n\tImport-Module \"$($ENV:SMS_ADMIN_UI_PATH)\\..\\ConfigurationManager.psd1\"\n}\nSet-Location \"" + txtblcSiteCode.Text + ":\"");
+            var codeFormat = @"If(-not(Get-Module ConfigurationManager))
+{{
+    Import-Module  ""$($ENV:SMS_ADMIN_UI_PATH)\..\ConfigurationManager.psd1""
+    Set-Location ""{0}:""
+}}
+";
+
+            var code = string.Format(codeFormat, txtblcSiteCode.Text);
+            ISEHelper.AddLine(HostObject, code);
         }
 
         private void Query_Application(object sender, RoutedEventArgs e)

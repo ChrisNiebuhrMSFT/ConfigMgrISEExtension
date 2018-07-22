@@ -39,9 +39,7 @@
                     <!--Contextmenu for General Tab-->
                     <TabItem.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="General">
-                                <MenuItem Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
-                            </MenuItem>
+                            <MenuItem Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
                             <MenuItem Header="WMI-Only">
                                 <MenuItem  x:Name="CtxQuerySiteCodeWMI" Header="Query Site Code" Click="MenuQuery_SiteCode" />
                             </MenuItem>
