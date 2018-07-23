@@ -91,6 +91,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>powershell_ise.exe "C:\Users\sccmadmin\Desktop\ExtTest.ps1"</PostBuildEvent>
+    <PostBuildEvent>robocopy.exe C:\Users\sccmadmin\Source\Repos\ConfigMgrExt\ConfigMgrExt\bin\Debug \\winsrv2008\c$\Temp\ExtTest ConfigMgrExt.dll
+powershell_ise.exe "C:\Users\sccmadmin\Desktop\ExtTest.ps1"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

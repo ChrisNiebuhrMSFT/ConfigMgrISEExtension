@@ -74,7 +74,6 @@ namespace ConfigMgrExt
                 }
             }
         }
-
         /// <summary>
         /// Gathers informations for each CMInfo derived Class and puts them to a related Grid
         /// </summary>
