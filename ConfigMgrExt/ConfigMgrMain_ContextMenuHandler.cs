@@ -42,7 +42,6 @@ namespace ConfigMgrExt
     Set-Location ""{0}:""
 }}
 ";
-
             var code = string.Format(codeFormat, txtblcSiteCode.Text);
             ISEHelper.AddLine(HostObject, code);
         }

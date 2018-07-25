@@ -27,6 +27,7 @@ namespace ConfigMgrExt
         private TextBoxLogger _txtLogger;
         private const int MAX_SOFTWAREUPDATECOUNT = 5000; //MAX Number of Softwarepdates for the Softwareupdate Grid
         private string _connectedSite; //stores the current connected Site
+        
         public ObjectModelRoot HostObject { get; set; } //Access ISE Hostobject
 
         public ConfigMgrMain()
@@ -150,12 +151,14 @@ namespace ConfigMgrExt
             if (Environment.GetEnvironmentVariable("SMS_ADMIN_UI_PATH") != null)
             {
                 _logger.WriteLog($"ConfigMgr Console installed on System {Environment.GetEnvironmentVariable("Computername")}.");
-                //_isConsoleInstalled = true;
+                ChkConsoleInstalled.IsChecked = true;
+
             }
             else
             {
                 _logger.WriteLog($"Console not installed on System {Environment.GetEnvironmentVariable("Computername")}.");
-                // _isConsoleInstalled = false;
+                ChkConsoleInstalled.IsChecked = false;
+
             }
         }
 
@@ -213,5 +216,6 @@ namespace ConfigMgrExt
                     break;
             }
         }
+
     }
 }

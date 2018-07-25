@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControl", "TestControl\TestControl.csproj", "{FC437B65-C9F4-42ED-A175-E783BBDC9D15}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigMgrExt", "ConfigMgrExt\ConfigMgrExt.csproj", "{F14505F9-E26A-4E60-8FEE-B858E8C3F3CB}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FC437B65-C9F4-42ED-A175-E783BBDC9D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC437B65-C9F4-42ED-A175-E783BBDC9D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC437B65-C9F4-42ED-A175-E783BBDC9D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC437B65-C9F4-42ED-A175-E783BBDC9D15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F14505F9-E26A-4E60-8FEE-B858E8C3F3CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F14505F9-E26A-4E60-8FEE-B858E8C3F3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F14505F9-E26A-4E60-8FEE-B858E8C3F3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
