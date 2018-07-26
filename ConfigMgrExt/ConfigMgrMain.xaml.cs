@@ -1,6 +1,5 @@
 ﻿#define TRACELOG
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +9,7 @@ using Microsoft.PowerShell.Host.ISE;
 using ConfigMgrExt.Helper;
 using ConfigMgrExt.CMInfoClass;
 using System.Windows.Forms;
-using System.Windows.Data;
 using ConfigMgrExt.Files.Helper;
-
 namespace ConfigMgrExt
 {
     /// <summary>

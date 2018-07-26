@@ -44,12 +44,12 @@
                     <!--Contextmenu for General Tab-->
                     <TabItem.ContextMenu>
                         <ContextMenu>
-                            <MenuItem  Style="{StaticResource CtxMenues}" Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
+                            <MenuItem   Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
                             <Separator />
                             <MenuItem Header="WMI-Only">
-                                <MenuItem  x:Name="CtxQuerySiteCodeWMI"  Header="Query Site Code" Click="MenuQuery_SiteCode" />
+                                <MenuItem  x:Name="CtxQuerySiteCodeWMI" IsEnabled="{Binding IsEnabled}" Header="Query Site Code" Click="MenuQuery_SiteCode" />
                             </MenuItem>
-                            <MenuItem Header="CmdLet">
+                            <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
                                 <MenuItem x:Name="CtxQuerySiteCodeCmdlet"  Header="Query Site Code" Click="MenuQuery_SiteCode"/>
                             </MenuItem>
                         </ContextMenu>
@@ -84,6 +84,18 @@
                 </TabItem>
                 <!--Application Tab-->
                 <TabItem Header="Applications" x:Name="TabApplication">
+                    <TabItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="WMI-Only" >
+                                <MenuItem x:Name="CtxQueryAllApplicationsWMI_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
+                                <MenuItem x:Name="CtxQueryAllApplicationsWMI_full" Header="Query all Applications full" Click="Query_AllApplications" />
+                            </MenuItem>
+                            <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
+                                <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
+                                <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_full" Header="Query all Applications full" Click="Query_AllApplications" />
+                            </MenuItem>
+                        </ContextMenu>
+                    </TabItem.ContextMenu>
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -101,8 +113,14 @@
                             <DataGrid x:Name ="grdApplication" Style="{StaticResource grdStyle}">
                                 <DataGrid.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem x:Name="CtxQueryApplicationWMI_fast" Header="Query Application WMI-Only (fast)" Click="Query_Application"/>
-                                        <MenuItem x:Name="CtxQueryApplicationCmdlet_fast" Header="Query Application CmdLet (fast)" Click="Query_Application"/>
+                                        <MenuItem Header="WMI-Only">
+                                        <MenuItem x:Name="CtxQueryApplicationWMI_fast" Header="Query Application (fast)" Click="Query_Application"/>
+                                        <MenuItem x:Name="CtxQueryApplicationWMI_full" Header="Query Application (full)" Click="Query_Application"/>
+                                        </MenuItem>
+                                        <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
+                                        <MenuItem x:Name="CtxQueryApplicationCmdlet_fast" Header="Query Application (fast)" Click="Query_Application"/>
+                                        <MenuItem x:Name="CtxQueryApplicationCmdlet_full" Header="Query Application (full)" Click="Query_Application"/>
+                                        </MenuItem>
                                     </ContextMenu>
                                 </DataGrid.ContextMenu>
                             </DataGrid>
