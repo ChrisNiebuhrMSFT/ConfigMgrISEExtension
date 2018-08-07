@@ -155,7 +155,6 @@ namespace ConfigMgrExt
             {
                 _logger.WriteLog($"Console not installed on System {Environment.GetEnvironmentVariable("Computername")}.");
                 ChkConsoleInstalled.IsChecked = false;
-
             }
         }
 

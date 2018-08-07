@@ -34,7 +34,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="ConfigMgr Easy Script" Margin="5" FontSize="16" FontWeight="Bold"/>
                 <Label Grid.Column="1" Content="SiteServer:" Margin="5" FontSize="16" MinWidth="100"/>
-                <TextBox x:Name="TxtSiteServer"  Grid.Column="2" Margin="5" FontSize="16" VerticalAlignment="Center" KeyDown="TxtSiteServer_KeyDown" Text="winsrv2016pri" TextChanged="TxtSiteServer_TextChanged"/>
+                <TextBox x:Name="TxtSiteServer"  Grid.Column="2" Margin="5" FontSize="16" VerticalAlignment="Center" KeyDown="TxtSiteServer_KeyDown" Text="sccm1" TextChanged="TxtSiteServer_TextChanged"/>
                 <Button x:Name="BtnConnect" Grid.Column="3" Margin="5" Content="Connect" Click="BtnConnect_Click"/>
             </Grid>
             <CheckBox x:Name="ChkConsoleInstalled" Content="Enable Cmdlet Templates" />
@@ -44,7 +44,7 @@
                     <!--Contextmenu for General Tab-->
                     <TabItem.ContextMenu>
                         <ContextMenu>
-                            <MenuItem   Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
+                            <MenuItem  Style="{StaticResource CtxMenues}" Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
                             <Separator />
                             <MenuItem Header="WMI-Only">
                                 <MenuItem  x:Name="CtxQuerySiteCodeWMI" IsEnabled="{Binding IsEnabled}" Header="Query Site Code" Click="MenuQuery_SiteCode" />

@@ -35,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdminUI.WqlQueryEngine">
-      <HintPath>..\..\..\..\..\..\..\SCCM_Files\Libraries\AdminUI.WqlQueryEngine.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\AdminUI.WqlQueryEngine.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ManagementProvider">
-      <HintPath>..\..\..\..\..\..\..\SCCM_Files\Libraries\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.PowerShell.GPowerShell, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -91,8 +91,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>robocopy.exe C:\Users\sccmadmin\Source\Repos\ConfigMgrExt\ConfigMgrExt\bin\Debug \\winsrv2008\c$\Temp\ExtTest ConfigMgrExt.dll
-powershell_ise.exe "C:\Users\sccmadmin\Desktop\ExtTest.ps1"
-</PostBuildEvent>
+    <PostBuildEvent>robocopy "E:\Visual Studio\Projects\ConfigMgrExt\ConfigMgrExt\bin\Debug" "\\win7client1\Devtest" ConfigMgrExt.dll 
+%25SystemRoot%25\sysnative\WindowsPowerShell\v1.0\PowerShell_ISE.exe  "C:\Users\sccmadmin\Desktop\Ext_Test.ps1"</PostBuildEvent>
   </PropertyGroup>
 </Project>
