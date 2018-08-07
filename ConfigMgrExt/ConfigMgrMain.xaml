@@ -127,6 +127,46 @@
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <!--Devices Tab-->
+                <TabItem Header="Devices">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="txtDevicesFilter" Margin="5" />
+                            <Button Grid.Column="1" x:Name="BtnApplyDevicesFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="730*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdDevices" Style="{StaticResource grdStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <!--Users Tab-->
+                <TabItem Header="Users">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="txtUserFilter" Margin="5" />
+                            <Button Grid.Column="1" x:Name="BtnApplyUserFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="730*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name ="grdUser" Style="{StaticResource grdStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
                 <!--Collections Tab-->
                 <TabItem Header="Collections" x:Name="TabCollection">
                     <StackPanel>

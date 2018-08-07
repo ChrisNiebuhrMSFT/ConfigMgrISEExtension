@@ -65,6 +65,8 @@
       <DependentUpon>ConfigMgrMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigMgrMain_ContextMenuHandler.cs" />
+    <Compile Include="Files\CMInfo\CMUser.cs" />
+    <Compile Include="Files\CMInfo\CMDevice.cs" />
     <Compile Include="Files\CMInfo\CMApplication.cs" />
     <Compile Include="Files\CMInfo\CMCollection.cs" />
     <Compile Include="Files\Helper\CMConverter.cs" />

@@ -84,6 +84,16 @@ namespace ConfigMgrExt
             grdApplication.ItemsSource = apps.ToArray();
             _logger.WriteLog("Applicationinformation successfully loaded");
 
+            _logger.WriteLog("Loading Deviceinformation");
+            List<CMDevice> devices = await CMInfoCollector.GetSMSObjectInformation<CMDevice>(wqlHelper, "SMS_CombinedDeviceResources");
+            grdDevices.ItemsSource = devices.ToArray();
+            _logger.WriteLog("Deviceinformation successfully loaded");
+
+            _logger.WriteLog("Loading Userinformation");
+            List<CMUser> user = await CMInfoCollector.GetSMSObjectInformation<CMUser>(wqlHelper, "SMS_CombinedUserResources");
+            grdUser.ItemsSource = user.ToArray();
+            _logger.WriteLog("Userinformation successfully loaded");
+
             _logger.WriteLog("Loading Collectioninformation");
             List<CMCollection> colls = await CMInfoCollector.GetSMSObjectInformation<CMCollection>(wqlHelper, "SMS_Collection");
             grdCollection.ItemsSource = colls.ToArray();
@@ -93,7 +103,6 @@ namespace ConfigMgrExt
             List<CMPackage> pkgs = await CMInfoCollector.GetSMSObjectInformation<CMPackage>(wqlHelper, "SMS_Package");
             grdPackage.ItemsSource = pkgs.ToArray();
             _logger.WriteLog("Packageinformation successfully loaded");
-
 
             _logger.WriteLog("Loading Softwareupdateinformation");
             List<CMSoftwareupdate> sus = await CMInfoCollector.GetSMSObjectInformation<CMSoftwareupdate>(wqlHelper, "SMS_Softwareupdate");
@@ -209,8 +218,13 @@ namespace ConfigMgrExt
                 case "BtnApplySoftwareupdateFilter":
                     CollectionViewHelper<CMSoftwareupdate>.ApplyFilter(txtSoftwareupdateFilter, grdSoftwareupdate, "Software Updates", "LocalizedDisplayname", _logger);
                     break;
+                case "BtnApplyDevicesFilter":
+                    CollectionViewHelper<CMDevice>.ApplyFilter(txtDevicesFilter, grdDevices, "Devices", "Name", _logger);
+                    break;
+                case "BtnApplyUserFilter":
+                    CollectionViewHelper<CMUser>.ApplyFilter(txtUserFilter, grdUser, "User", "Name", _logger);
+                    break;
             }
         }
-
     }
 }
