@@ -64,7 +64,12 @@ namespace ConfigMgrExt.Helper
             var logTime = String.Format("{0:HH:mm:ss.fff}", DateTime.Now);
             var logDate = String.Format("{0:MM-dd-yyyy}", DateTime.Now);
             var timeZoneBias = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).TotalMinutes;
+
             var logTimePlusBias = String.Format("{0}-{1}", logTime, timeZoneBias);
+            if(logTimePlusBias.Contains("--"))
+            {
+                logTimePlusBias = logTimePlusBias.Replace("--", "-");
+            }
 
             var output = String.Format("<![LOG[{0}]LOG]!><time=\"{1}\" date=\"{2}\" component=\"{3}\" context=\"\" type=\"{4}\" thread=\"{5}\" file=\"{6}\">", message, logTimePlusBias, logDate, Component, ((int)logtype), (Process.GetCurrentProcess().Id), Filename);
             try

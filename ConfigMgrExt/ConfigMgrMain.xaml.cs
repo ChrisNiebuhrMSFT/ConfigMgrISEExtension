@@ -132,7 +132,7 @@ namespace ConfigMgrExt
             _logger = new Logger();
             //Create and Register a Textboxlogger + CmTrace Logger for this application
 #if (TRACELOG)
-            _cmtrace = new CMTraceLog(Environment.CurrentDirectory, "Test.log", "ConfigMgrEasy");
+            _cmtrace = new CMTraceLog(Environment.CurrentDirectory, "Test.log", "ConfigMgrEasyScript");
             _logger.LogEntry += _cmtrace.WriteLog;
 #endif
             _txtLogger = new TextBoxLogger(txtLogging);
@@ -149,7 +149,6 @@ namespace ConfigMgrExt
             {
                 _logger.WriteLog($"ConfigMgr Console installed on System {Environment.GetEnvironmentVariable("Computername")}.");
                 ChkConsoleInstalled.IsChecked = true;
-
             }
             else
             {
