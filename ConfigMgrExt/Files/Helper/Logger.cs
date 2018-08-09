@@ -13,7 +13,7 @@ namespace ConfigMgrExt.Helper
     /// </summary>
     public class Logger : ILogger
     {
-        public event Logging LogEntry;
+        public event EventHandler<LogEventArgs> LogEntry;
 
         public void WriteLog(string message)
         {

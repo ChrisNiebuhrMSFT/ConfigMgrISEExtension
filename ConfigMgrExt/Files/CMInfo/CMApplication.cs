@@ -16,6 +16,7 @@ namespace ConfigMgrExt.CMInfoClass
         public string ModelName { get; set; }
         public string CIVersion { get; set; }
         public string ObjectPath { get; set; }
+
         #endregion
 
         #region Constructors

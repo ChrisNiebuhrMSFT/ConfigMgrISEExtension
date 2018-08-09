@@ -34,7 +34,7 @@ namespace ConfigMgrExt
 
         /// <summary>
         /// Connects to the SMSProvider and gathers some informations regarding Applications, Collections, Softwareupdates,
-        /// Drivers, Tasksequences , Packages
+        /// Drivers, Tasksequences , Packages, Devices, Users
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
