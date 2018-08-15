@@ -23,221 +23,228 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <StackPanel>
-            <!--Defining the Header of the Extention-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="ConfigMgr Easy Script" Margin="5" FontSize="16" FontWeight="Bold"/>
-                <Label Grid.Column="1" Content="SiteServer:" Margin="5" FontSize="16" MinWidth="100"/>
-                <TextBox x:Name="TxtSiteServer"  Grid.Column="2" Margin="5" FontSize="16" VerticalAlignment="Center" KeyDown="TxtSiteServer_KeyDown" Text="sccm1" TextChanged="TxtSiteServer_TextChanged"/>
-                <Button x:Name="BtnConnect" Grid.Column="3" Margin="5" Content="Connect" Click="BtnConnect_Click"/>
-            </Grid>
-            <CheckBox x:Name="ChkConsoleInstalled" Content="Enable Cmdlet Templates" />
-            <!--Defining the Tabs for each Topic / Not final yet-->
-            <TabControl x:Name="TabMenu" IsEnabled="False" Height="300">
-                <TabItem Header="General Information">
-                    <!--Contextmenu for General Tab-->
-                    <TabItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem  Style="{StaticResource CtxMenues}" Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
-                            <Separator />
-                            <MenuItem Header="WMI-Only">
-                                <MenuItem  x:Name="CtxQuerySiteCodeWMI" IsEnabled="{Binding IsEnabled}" Header="Query Site Code" Click="MenuQuery_SiteCode" />
-                            </MenuItem>
-                            <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
-                                <MenuItem x:Name="CtxQuerySiteCodeCmdlet"  Header="Query Site Code" Click="MenuQuery_SiteCode"/>
-                            </MenuItem>
-                        </ContextMenu>
-                    </TabItem.ContextMenu>
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100*"/>
-                                <ColumnDefinition Width="250*"/>
-                                <ColumnDefinition Width="400*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="SiteServer:" Margin="5" />
-                            <TextBlock Grid.Column="1" Text="{Binding ElementName=TxtSiteServer, Path=Text}" Margin="5,10" FontWeight="Bold" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="6*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="SiteCode:" Margin="5" />
-                            <TextBlock Grid.Column="1" x:Name="TxtblcSiteCode" Margin="5" FontWeight="Bold" VerticalAlignment="Center"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="85"/>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="Logging:" Margin="5"/>
-                            <TextBox Grid.Column="1" x:Name="TxtLogging" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="5" Height="180"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Application Tab-->
-                <TabItem Header="Applications" x:Name="TabApplication">
-                    <TabItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="WMI-Only" >
-                                <MenuItem x:Name="CtxQueryAllApplicationsWMI_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
-                                <MenuItem x:Name="CtxQueryAllApplicationsWMI_full" Header="Query all Applications full" Click="Query_AllApplications" />
-                            </MenuItem>
-                            <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
-                                <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
-                                <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_full" Header="Query all Applications full" Click="Query_AllApplications" />
-                            </MenuItem>
-                        </ContextMenu>
-                    </TabItem.ContextMenu>
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" x:Name="TxtApplicationFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
-                            <Button Grid.Column="1" x:Name="BtnApplyApplicationFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35*"/>
-                                <ColumnDefinition Width="730*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="GrdApplication" Style="{StaticResource grdStyle}">
-                                <DataGrid.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="WMI-Only">
-                                        <MenuItem x:Name="CtxQueryApplicationWMI_fast" Header="Query Application (fast)" Click="Query_Application"/>
-                                        <MenuItem x:Name="CtxQueryApplicationWMI_full" Header="Query Application (full)" Click="Query_Application"/>
-                                        </MenuItem>
-                                        <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
-                                        <MenuItem x:Name="CtxQueryApplicationCmdlet_fast" Header="Query Application (fast)" Click="Query_Application"/>
-                                        <MenuItem x:Name="CtxQueryApplicationCmdlet_full" Header="Query Application (full)" Click="Query_Application"/>
-                                        </MenuItem>
-                                    </ContextMenu>
-                                </DataGrid.ContextMenu>
-                            </DataGrid>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Devices Tab-->
-                <TabItem Header="Devices">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" x:Name="TxtDevicesFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
-                            <Button Grid.Column="1" x:Name="BtnApplyDevicesFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35*"/>
-                                <ColumnDefinition Width="730*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="GrdDevices" Style="{StaticResource grdStyle}"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Users Tab-->
-                <TabItem Header="Users">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" x:Name="TxtUserFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown"  />
-                            <Button Grid.Column="1" x:Name="BtnApplyUserFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35*"/>
-                                <ColumnDefinition Width="730*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="grdUser" Style="{StaticResource grdStyle}"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Collections Tab-->
-                <TabItem Header="Collections" x:Name="TabCollection">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" x:Name="TxtCollectionFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
-                            <Button Grid.Column="1" x:Name="BtnApplyCollectionFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="GrdCollection" SelectionMode="Single" Style="{StaticResource grdStyle}" />
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Packages Tab-->
-                <TabItem Header="Packages" x:Name="TabPackage" >
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35*"/>
-                                <ColumnDefinition Width="731*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="GrdPackage" Style="{StaticResource grdStyle}"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Softwareupdates Tab-->
-                <TabItem Header="Software Updates">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="150"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" x:Name="TxtSoftwareupdateFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
-                            <Button Grid.Column="1" x:Name="BtnApplySoftwareupdateFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35*"/>
-                                <ColumnDefinition Width="730*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="GrdSoftwareupdate" Style="{StaticResource grdStyle}"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <!--Tasksequences Tab-->
-                <TabItem Header="Tasksequences">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35*"/>
-                                <ColumnDefinition Width="730*"/>
-                            </Grid.ColumnDefinitions>
-                            <DataGrid x:Name ="GrdTasksequence" Style="{StaticResource grdStyle}"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="Server" >
+                <StackPanel>
+                    <!--Defining the Header of the Extention-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="ConfigMgr Easy Script" Margin="5" FontSize="16" FontWeight="Bold"/>
+                        <Label Grid.Column="1" Content="SiteServer:" Margin="5" FontSize="16" MinWidth="100"/>
+                        <TextBox x:Name="TxtSiteServer"  Grid.Column="2" Margin="5" FontSize="16" VerticalAlignment="Center" KeyDown="TxtSiteServer_KeyDown" Text="sccm1" TextChanged="TxtSiteServer_TextChanged"/>
+                        <Button x:Name="BtnConnect" Grid.Column="3" Margin="5" Content="Connect" Click="BtnConnect_Click"/>
+                    </Grid>
+                    <CheckBox x:Name="ChkConsoleInstalled" Content="Enable Cmdlet Templates" />
+                    <!--Defining the Tabs for each Topic / Not final yet-->
+                    <TabControl x:Name="TabMenu" IsEnabled="False" Height="300">
+                        <TabItem Header="General Information">
+                            <!--Contextmenu for General Tab-->
+                            <TabItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem  Style="{StaticResource CtxMenues}" Header="Load ConfigMgr Cmdlets Module" Click="MenuConfigMgr_CmdLet" />
+                                    <Separator />
+                                    <MenuItem Header="WMI-Only">
+                                        <MenuItem  x:Name="CtxQuerySiteCodeWMI" IsEnabled="{Binding IsEnabled}" Header="Query Site Code" Click="MenuQuery_SiteCode" />
+                                    </MenuItem>
+                                    <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
+                                        <MenuItem x:Name="CtxQuerySiteCodeCmdlet"  Header="Query Site Code" Click="MenuQuery_SiteCode"/>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TabItem.ContextMenu>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100*"/>
+                                        <ColumnDefinition Width="250*"/>
+                                        <ColumnDefinition Width="400*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="SiteServer:" Margin="5" />
+                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=TxtSiteServer, Path=Text}" Margin="5,10" FontWeight="Bold" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="SiteCode:" Margin="5" />
+                                    <TextBlock Grid.Column="1" x:Name="TxtblcSiteCode" Margin="5" FontWeight="Bold" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="85"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="Logging:" Margin="5"/>
+                                    <TextBox Grid.Column="1" x:Name="TxtLogging" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="5" Height="180"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Application Tab-->
+                        <TabItem Header="Applications" x:Name="TabApplication">
+                            <TabItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="WMI-Only" >
+                                        <MenuItem x:Name="CtxQueryAllApplicationsWMI_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
+                                        <MenuItem x:Name="CtxQueryAllApplicationsWMI_full" Header="Query all Applications full" Click="Query_AllApplications" />
+                                    </MenuItem>
+                                    <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
+                                        <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
+                                        <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_full" Header="Query all Applications full" Click="Query_AllApplications" />
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TabItem.ContextMenu>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtApplicationFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyApplicationFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdApplication" Style="{StaticResource grdStyle}">
+                                        <DataGrid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="WMI-Only">
+                                                    <MenuItem x:Name="CtxQueryApplicationWMI_fast" Header="Query Application (fast)" Click="Query_Application"/>
+                                                    <MenuItem x:Name="CtxQueryApplicationWMI_full" Header="Query Application (full)" Click="Query_Application"/>
+                                                </MenuItem>
+                                                <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
+                                                    <MenuItem x:Name="CtxQueryApplicationCmdlet_fast" Header="Query Application (fast)" Click="Query_Application"/>
+                                                    <MenuItem x:Name="CtxQueryApplicationCmdlet_full" Header="Query Application (full)" Click="Query_Application"/>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </DataGrid.ContextMenu>
+                                    </DataGrid>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Devices Tab-->
+                        <TabItem Header="Devices">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtDevicesFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyDevicesFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdDevices" Style="{StaticResource grdStyle}"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Users Tab-->
+                        <TabItem Header="Users">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtUserFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown"  />
+                                    <Button Grid.Column="1" x:Name="BtnApplyUserFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="grdUser" Style="{StaticResource grdStyle}"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Collections Tab-->
+                        <TabItem Header="Collections" x:Name="TabCollection">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtCollectionFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyCollectionFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdCollection" SelectionMode="Single" Style="{StaticResource grdStyle}" />
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Packages Tab-->
+                        <TabItem Header="Packages" x:Name="TabPackage" >
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="731*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdPackage" Style="{StaticResource grdStyle}"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Softwareupdates Tab-->
+                        <TabItem Header="Software Updates">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtSoftwareupdateFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplySoftwareupdateFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdSoftwareupdate" Style="{StaticResource grdStyle}"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Tasksequences Tab-->
+                        <TabItem Header="Tasksequences">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdTasksequence" Style="{StaticResource grdStyle}"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Client" >
+                
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
