@@ -165,7 +165,7 @@
                                         <ColumnDefinition Width="35*"/>
                                         <ColumnDefinition Width="730*"/>
                                     </Grid.ColumnDefinitions>
-                                    <DataGrid x:Name ="grdUser" Style="{StaticResource grdStyle}"/>
+                                    <DataGrid x:Name ="GrdUser" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
                         </TabItem>
@@ -200,6 +200,14 @@
                             <StackPanel>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtPackagesFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyPackageFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="35*"/>
                                         <ColumnDefinition Width="731*"/>
                                     </Grid.ColumnDefinitions>
@@ -227,9 +235,37 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
+                        <!--Softwareupdates Tab-->
+                        <TabItem Header="Software Updates Groups">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtSoftwareupdateGroupFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplySoftwareupdateGroupFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdSoftwareupdateGroup" Style="{StaticResource grdStyle}"/>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
                         <!--Tasksequences Tab-->
                         <TabItem Header="Tasksequences">
                             <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtTasksequenceFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyTasksequenceFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="35*"/>

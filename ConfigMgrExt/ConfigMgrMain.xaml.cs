@@ -91,7 +91,7 @@ namespace ConfigMgrExt
 
             _logger.WriteLog("Loading Userinformation");
             List<CMUser> user = await CMInfoCollector.GetSMSObjectInformation<CMUser>(wqlHelper, "SMS_CombinedUserResources");
-            grdUser.ItemsSource = user.ToArray();
+            GrdUser.ItemsSource = user.ToArray();
             _logger.WriteLog("Userinformation successfully loaded");
 
             _logger.WriteLog("Loading Collectioninformation");
@@ -108,6 +108,11 @@ namespace ConfigMgrExt
             List<CMSoftwareupdate> sus = await CMInfoCollector.GetSMSObjectInformation<CMSoftwareupdate>(wqlHelper, "SMS_Softwareupdate");
             GrdSoftwareupdate.ItemsSource = sus.Take(MAX_SOFTWAREUPDATECOUNT)
                                                 .ToArray();
+            _logger.WriteLog("Softwareupdateinformation successfully loaded");
+
+            _logger.WriteLog("Loading SoftwareupdateGroupinformation");
+            List<CMSoftwareupdateGroup> sugs = await CMInfoCollector.GetSMSObjectInformation<CMSoftwareupdateGroup>(wqlHelper, "SMS_AuthorizationList");
+            GrdSoftwareupdateGroup.ItemsSource = sugs.ToArray();
             _logger.WriteLog("Softwareupdateinformation successfully loaded");
 
             _logger.WriteLog("Loading Tasksequenceinformation");
@@ -218,15 +223,30 @@ namespace ConfigMgrExt
                 case "BtnApplySoftwareupdateFilter":
                     CollectionViewHelper<CMSoftwareupdate>.ApplyFilter(TxtSoftwareupdateFilter, GrdSoftwareupdate, "Software Updates", "LocalizedDisplayname", _logger);
                     break;
+                case "BtnApplySoftwareupdateGroupFilter":
+                    CollectionViewHelper<CMSoftwareupdateGroup>.ApplyFilter(TxtSoftwareupdateGroupFilter, GrdSoftwareupdateGroup, "Software Update Groups", "LocalizedDisplayname", _logger);
+                    break;
                 case "BtnApplyDevicesFilter":
                     CollectionViewHelper<CMDevice>.ApplyFilter(TxtDevicesFilter, GrdDevices, "Devices", "Name", _logger);
                     break;
                 case "BtnApplyUserFilter":
-                    CollectionViewHelper<CMUser>.ApplyFilter(TxtUserFilter, grdUser, "User", "Name", _logger);
+                    CollectionViewHelper<CMUser>.ApplyFilter(TxtUserFilter, GrdUser, "User", "Name", _logger);
                     break;
+                case "BtnApplyTasksequenceFilter":
+                    CollectionViewHelper<CMTasksequence>.ApplyFilter(TxtTasksequenceFilter, GrdTasksequence, "Tasksequences", "Name", _logger);
+                    break;
+                case "BtnApplyPackageFilter":
+                    CollectionViewHelper<CMPackage>.ApplyFilter(TxtPackagesFilter, GrdPackage, "Packages", "Name", _logger);
+                    break;
+
+
             }
         }
-
+        /// <summary>
+        /// Enables the Filter functionality by Pressing the Enter Key for all Filter Textboxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtApplyFilter_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -235,30 +255,29 @@ namespace ConfigMgrExt
                 switch (s.Name)
                 {
                     case "TxtApplicationFilter":
-                        {
                             BtnApplyFilter_Click(BtnApplyApplicationFilter, e);
                             break;
-                        }
+                    case "TxtPackagesFilter":
+                        BtnApplyFilter_Click(BtnApplyPackageFilter, e);
+                        break;
                     case "TxtDevicesFilter":
-                        {
                             BtnApplyFilter_Click(BtnApplyDevicesFilter, e);
                             break;
-                        }
                     case "TxtUserFilter":
-                        {
                             BtnApplyFilter_Click(BtnApplyUserFilter, e);
                             break;
-                        }
                     case "TxtCollectionFilter":
-                        {
                             BtnApplyFilter_Click(BtnApplyCollectionFilter, e);
                             break;
-                        }
                     case "TxtSoftwareupdateFilter":
-                        {
                             BtnApplyFilter_Click(BtnApplySoftwareupdateFilter, e);
                             break;
-                        }
+                    case "TxtSoftwareupdateGroupFilter":
+                            BtnApplyFilter_Click(BtnApplySoftwareupdateGroupFilter, e);
+                            break;
+                    case "TxtTasksequenceFilter":
+                        BtnApplyFilter_Click(BtnApplyTasksequenceFilter, e);
+                        break;
                 }
                 e.Handled = true;
             }
