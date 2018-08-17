@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="600">
+             d:DesignHeight="350" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <!--Using grdStyle for all Datagrids-->
@@ -41,7 +41,7 @@
                     </Grid>
                     <CheckBox x:Name="ChkConsoleInstalled" Content="Enable Cmdlet Templates" />
                     <!--Defining the Tabs for each Topic / Not final yet-->
-                    <TabControl x:Name="TabMenu" IsEnabled="False" Height="300">
+                    <TabControl x:Name="TabMenu" IsEnabled="False">
                         <TabItem Header="General Information">
                             <!--Contextmenu for General Tab-->
                             <TabItem.ContextMenu>
@@ -85,7 +85,6 @@
                             </StackPanel>
                         </TabItem>
                         <!--Application Tab-->
-
                         <TabItem Header="Applications" x:Name="TabApplication">
                             <TabItem.ContextMenu>
                                 <ContextMenu>
@@ -109,10 +108,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyApplicationFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdApplication" Style="{StaticResource grdStyle}">
                                         <DataGrid.ContextMenu>
                                             <ContextMenu>
@@ -142,10 +137,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyDeploymenttypeFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdDeploymenttype" Style="{StaticResource grdStyle}">
                                     </DataGrid>
                                 </Grid>
@@ -163,10 +154,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyDevicesFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdDevices" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
@@ -183,10 +170,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyUserFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdUser" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
@@ -199,21 +182,11 @@
                                         <ColumnDefinition Width="150"/>
                                         <ColumnDefinition Width="150"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" x:Name="TxtCollectionFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <TextBox Grid.Column="0" x:Name="TxtCollectionFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown"  />
                                     <Button Grid.Column="1" x:Name="BtnApplyCollectionFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"/>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                </Grid>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <DataGrid x:Name ="GrdCollection" SelectionMode="Single" Style="{StaticResource grdStyle}" />
+                                    <DataGrid x:Name ="GrdCollection" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
                         </TabItem>
@@ -229,10 +202,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyPackageFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="731*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdPackage" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
@@ -249,11 +218,8 @@
                                     <Button Grid.Column="1" x:Name="BtnApplySoftwareupdateFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <DataGrid x:Name ="GrdSoftwareupdate" Style="{StaticResource grdStyle}"/>
+                                    <DataGrid x:Name ="GrdSoftwareupdate" Style="{StaticResource grdStyle}">
+                                    </DataGrid>
                                 </Grid>
                             </StackPanel>
                         </TabItem>
@@ -269,10 +235,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplySoftwareupdateGroupFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdSoftwareupdateGroup" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
@@ -289,10 +251,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyTasksequenceFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdTasksequence" Style="{StaticResource grdStyle}"/>
                                 </Grid>
                             </StackPanel>
@@ -309,10 +267,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyBootimageFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdBootimage" Style="{StaticResource grdStyle}">
                                     </DataGrid>
                                 </Grid>
@@ -330,10 +284,6 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyOSImageFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="35*"/>
-                                        <ColumnDefinition Width="730*"/>
-                                    </Grid.ColumnDefinitions>
                                     <DataGrid x:Name ="GrdOSImage" Style="{StaticResource grdStyle}">
                                     </DataGrid>
                                 </Grid>

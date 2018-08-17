@@ -13,14 +13,18 @@ namespace ConfigMgrExt.CMInfoClass
     {
         #region Members
         public string LocalizedDisplayname { get; set; }
-        public string ModelName { get; set; }
         public string CIVersion { get; set; }
         public string ObjectPath { get; set; }
-
+        public string CreatedBy{ get; set; }
+        public string IsDeployed { get; set; }
+        public string IsSuperseded{ get; set; }
+        public string IsSuperseding{ get; set; }
+        public string Manufacturer { get; set; }
+        public string ModelName { get; set; }
         #endregion
 
         #region Constructors
-     
+
         #endregion
 
         #region Methods

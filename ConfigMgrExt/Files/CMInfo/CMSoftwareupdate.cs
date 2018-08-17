@@ -17,6 +17,10 @@ namespace ConfigMgrExt.CMInfoClass
         public string CI_ID { get; set; }
         public string IsSuperseded { get; set; }
         public string IsExpired { get; set; }
+        public string IsOfflineServiceable { get; set; }
+        public string NumMissing { get; set; }
+        public string NumPresent { get; set; }
+        public string NumTotal { get; set; }
         #endregion
 
         #region Constructors

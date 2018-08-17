@@ -22,7 +22,7 @@ namespace ConfigMgrExt
         private CMTraceLog _cmtrace;
 #endif
         private TextBoxLogger _txtLogger;
-        private const int MAX_SOFTWAREUPDATECOUNT = 5000; //MAX Number of Softwarepdates for the Softwareupdate Grid
+        private const int MAX_SOFTWAREUPDATECOUNT = 50000; //MAX Number of Softwarepdates for the Softwareupdate Grid
         private string _connectedSite; //stores the current connected Site
         
         public ObjectModelRoot HostObject { get; set; } //Access ISE Hostobject
@@ -107,7 +107,7 @@ namespace ConfigMgrExt
             _logger.WriteLog("Loading Softwareupdateinformation");
             List<CMSoftwareupdate> sus = await CMInfoCollector.GetSMSObjectInformation<CMSoftwareupdate>(wqlHelper, "SMS_Softwareupdate");
             GrdSoftwareupdate.ItemsSource = sus.Take(MAX_SOFTWAREUPDATECOUNT)
-                                                .ToArray();
+                                                .ToArray();;
             _logger.WriteLog("Softwareupdateinformation successfully loaded");
 
             _logger.WriteLog("Loading SoftwareupdateGroupinformation");
