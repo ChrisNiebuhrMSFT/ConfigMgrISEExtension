@@ -85,6 +85,7 @@
                             </StackPanel>
                         </TabItem>
                         <!--Application Tab-->
+
                         <TabItem Header="Applications" x:Name="TabApplication">
                             <TabItem.ContextMenu>
                                 <ContextMenu>
@@ -125,6 +126,27 @@
                                                 </MenuItem>
                                             </ContextMenu>
                                         </DataGrid.ContextMenu>
+                                    </DataGrid>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--Deploymenttypes Tab-->
+                        <TabItem Header="Deploymenttypes" x:Name="TabDeploymenttype">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtDeploymenttypeFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyDeploymenttypeFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdDeploymenttype" Style="{StaticResource grdStyle}">
                                     </DataGrid>
                                 </Grid>
                             </StackPanel>
@@ -235,8 +257,8 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
-                        <!--Softwareupdates Tab-->
-                        <TabItem Header="Software Updates Groups">
+                        <!--Softwareupdate Group Tab-->
+                        <TabItem Header="Software Update Groups">
                             <StackPanel>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -275,11 +297,52 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
+                        <!--Bootimage Tab-->
+                        <TabItem Header="Bootimages" x:Name="TabBootimage">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtBootimageFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyBootimageFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdBootimage" Style="{StaticResource grdStyle}">
+                                    </DataGrid>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
+                        <!--OSImage Tab-->
+                        <TabItem Header="OSImages" x:Name="TabOSImage">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="TxtOSImageFilter" Margin="5" KeyDown="TxtApplyFilter_KeyDown" />
+                                    <Button Grid.Column="1" x:Name="BtnApplyOSImageFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="730*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <DataGrid x:Name ="GrdOSImage" Style="{StaticResource grdStyle}">
+                                    </DataGrid>
+                                </Grid>
+                            </StackPanel>
+                        </TabItem>
                     </TabControl>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Client" >
-                
             </TabItem>
         </TabControl>
     </Grid>
