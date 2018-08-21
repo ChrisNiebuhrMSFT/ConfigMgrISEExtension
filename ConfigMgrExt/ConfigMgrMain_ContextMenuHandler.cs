@@ -117,6 +117,16 @@ $allApps | Foreach-Object {{$_.Get()}}";
             }
         }
 
+        private void Query_AllCollections(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Query_Collection(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
 

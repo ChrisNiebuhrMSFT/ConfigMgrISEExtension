@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 namespace ConfigMgrExt.CMInfoClass
 {
     /// <summary>
-    /// Represents the main informations of an SMS_Application Object
+    /// Represents the main informations of an SMS_Deploymenttype Object
     /// </summary>
-    public class CMApplication : CMInfo
+    public class CMDeploymenttype : CMInfo
     {
         #region Members
         public string LocalizedDisplayname { get; set; }
         public string CIVersion { get; set; }
-        public string NumberOfDeploymentTypes { get; set; }
-        public string ObjectPath { get; set; }
-        public string CreatedBy{ get; set; }
-        public string IsDeployed { get; set; }
-        public string IsSuperseded{ get; set; }
-        public string IsSuperseding{ get; set; }
-        public string Manufacturer { get; set; }
+        public string ContentId { get; set; }
+        public string IsLatest { get; set; }
+        public string CreatedBy { get; set; }
+        public string AppModelName{ get; set; }
         public string ModelName { get; set; }
         #endregion
 

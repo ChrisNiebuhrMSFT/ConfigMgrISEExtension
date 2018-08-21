@@ -51,6 +51,7 @@
                                     <MenuItem Header="WMI-Only">
                                         <MenuItem  x:Name="CtxQuerySiteCodeWMI" IsEnabled="{Binding IsEnabled}" Header="Query Site Code" Click="MenuQuery_SiteCode" />
                                     </MenuItem>
+                                    <Separator/>
                                     <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
                                         <MenuItem x:Name="CtxQuerySiteCodeCmdlet"  Header="Query Site Code" Click="MenuQuery_SiteCode"/>
                                     </MenuItem>
@@ -92,6 +93,7 @@
                                         <MenuItem x:Name="CtxQueryAllApplicationsWMI_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
                                         <MenuItem x:Name="CtxQueryAllApplicationsWMI_full" Header="Query all Applications full" Click="Query_AllApplications" />
                                     </MenuItem>
+                                    <Separator/>
                                     <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
                                         <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
                                         <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_full" Header="Query all Applications full" Click="Query_AllApplications" />
@@ -176,6 +178,21 @@
                         </TabItem>
                         <!--Collections Tab-->
                         <TabItem Header="Collections" x:Name="TabCollection">
+                            <TabItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="WMI-Only" >
+                                        <MenuItem x:Name="CtxQueryAllCollectionsWMI" Header="Query all Collections" Click="Query_AllCollections" />
+                                        <MenuItem x:Name="CtxQueryAllDeviceCollectionsWMI" Header="Query all Device-Collections" Click="Query_Collection" />
+                                        <MenuItem x:Name="CtxQueryAllUserCollectionsWMI" Header="Query all User-Collections" Click="Query_Collection" />
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
+                                        <MenuItem x:Name="CtxQueryAllCollectionsCmdlet" Header="Query all Collections" Click="Query_AllCollections" />
+                                        <MenuItem x:Name="CtxQueryAllDeviceCollectionsCmdlet" Header="Query all Device-Collections" Click="Query_Collection" />
+                                        <MenuItem x:Name="CtxQueryAllUserCollectionsCmdlet" Header="Query all User-Collections" Click="Query_Collection" />
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TabItem.ContextMenu>
                             <StackPanel>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -186,7 +203,18 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyCollectionFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <DataGrid x:Name ="GrdCollection" Style="{StaticResource grdStyle}"/>
+                                    <DataGrid x:Name ="GrdCollection" Style="{StaticResource grdStyle}">
+                                        <DataGrid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="WMI-Only">
+
+                                                </MenuItem>
+                                                <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
+
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </DataGrid.ContextMenu>
+                                    </DataGrid>
                                 </Grid>
                             </StackPanel>
                         </TabItem>

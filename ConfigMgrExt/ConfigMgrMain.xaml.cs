@@ -119,6 +119,12 @@ namespace ConfigMgrExt
             List<CMTasksequence> ts = await CMInfoCollector.GetSMSObjectInformation<CMTasksequence>(wqlHelper, "SMS_TaskSequencePackage");
             GrdTasksequence.ItemsSource = ts.ToArray();
             _logger.WriteLog("Tasksequenceinformation successfully loaded");
+
+            _logger.WriteLog("Loading Deploymenttypeinformation");
+            List<CMDeploymenttype> dt = await CMInfoCollector.GetSMSObjectInformation<CMDeploymenttype>(wqlHelper, "SMS_Deploymenttype");
+            GrdDeploymenttype.ItemsSource = dt.Where(d => d.IsLatest=="True")
+                                              .ToArray();
+            _logger.WriteLog("Deploymenttypeinformation successfully loaded");
         }
 
         /// <summary>
@@ -238,7 +244,9 @@ namespace ConfigMgrExt
                 case "BtnApplyPackageFilter":
                     CollectionViewHelper<CMPackage>.ApplyFilter(TxtPackagesFilter, GrdPackage, "Packages", "Name", _logger);
                     break;
-
+                case "BtnApplyDeploymenttypeFilter":
+                    CollectionViewHelper<CMDeploymenttype>.ApplyFilter(TxtDeploymenttypeFilter, GrdDeploymenttype, "Deploymenttypes", "LocalizedDisplayname", _logger);
+                    break;
 
             }
         }
@@ -278,9 +286,14 @@ namespace ConfigMgrExt
                     case "TxtTasksequenceFilter":
                         BtnApplyFilter_Click(BtnApplyTasksequenceFilter, e);
                         break;
+                    case "TxtDeploymenttypeFilter":
+                        BtnApplyFilter_Click(BtnApplyDeploymenttypeFilter, e);
+                        break;
                 }
                 e.Handled = true;
             }
         }
+
+      
     }
 }

@@ -14,5 +14,7 @@ namespace ConfigMgrExt.CMInfoClass
         public string Name { get; set; }
         public string PackageID { get; set; }
         public string Description { get; set; }
+        public string ReferencesCount { get; set; }
+        public string  ObjectPath { get; set; }
     }
 }
