@@ -65,6 +65,8 @@
       <DependentUpon>ConfigMgrMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigMgrMain_ContextMenuHandler.cs" />
+    <Compile Include="Files\CMInfo\CMOSImage.cs" />
+    <Compile Include="Files\CMInfo\CMBootimage.cs" />
     <Compile Include="Files\CMInfo\CMDeploymentType.cs" />
     <Compile Include="Files\CMInfo\CMSoftwareupdateGroup.cs" />
     <Compile Include="Files\CMInfo\CMUser.cs" />
@@ -92,6 +94,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

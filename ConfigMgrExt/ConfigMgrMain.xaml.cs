@@ -125,6 +125,16 @@ namespace ConfigMgrExt
             GrdDeploymenttype.ItemsSource = dt.Where(d => d.IsLatest=="True")
                                               .ToArray();
             _logger.WriteLog("Deploymenttypeinformation successfully loaded");
+
+            _logger.WriteLog("Loading Bootimageinformation");
+            List<CMBootimage> bi = await CMInfoCollector.GetSMSObjectInformation<CMBootimage>(wqlHelper, "SMS_BootimagePackage");
+            GrdBootimage.ItemsSource = bi.ToArray();
+            _logger.WriteLog("Bootimageinformation successfully loaded");
+
+            _logger.WriteLog("Loading Operatingsystemimageinformation");
+            List<CMOSImage> oi = await CMInfoCollector.GetSMSObjectInformation<CMOSImage>(wqlHelper, "SMS_ImagePackage");
+            GrdOSImage.ItemsSource = oi.ToArray();
+            _logger.WriteLog("Operatingsystemimageinformation successfully loaded");
         }
 
         /// <summary>
@@ -216,7 +226,7 @@ namespace ConfigMgrExt
         /// <param name="e"></param>
         private void BtnApplyFilter_Click(object sender, RoutedEventArgs e)
         {
-            var s = (System.Windows.Controls.Button)sender; //The Button determines which Filter will be Applied 
+            var s = (System.Windows.Controls.Button)sender; //The Button (sender) determines which Filter will be Applied 
 
             switch (s.Name)
             {
@@ -246,6 +256,12 @@ namespace ConfigMgrExt
                     break;
                 case "BtnApplyDeploymenttypeFilter":
                     CollectionViewHelper<CMDeploymenttype>.ApplyFilter(TxtDeploymenttypeFilter, GrdDeploymenttype, "Deploymenttypes", "LocalizedDisplayname", _logger);
+                    break;
+                case "BtnApplyBootimageFilter":
+                    CollectionViewHelper<CMBootimage>.ApplyFilter(TxtBootimageFilter, GrdBootimage, "Bootimages", "Name", _logger);
+                    break;
+                case "BtnApplyOSImageFilter":
+                    CollectionViewHelper<CMOSImage>.ApplyFilter(TxtOSImageFilter, GrdOSImage, "OS-Images", "Name", _logger);
                     break;
 
             }
@@ -289,11 +305,16 @@ namespace ConfigMgrExt
                     case "TxtDeploymenttypeFilter":
                         BtnApplyFilter_Click(BtnApplyDeploymenttypeFilter, e);
                         break;
+                    case "TxtBootimageFilter":
+                        BtnApplyFilter_Click(BtnApplyBootimageFilter, e);
+                        break;
+                    case "TxtOSImageFilter":
+                        BtnApplyFilter_Click(BtnApplyOSImageFilter, e);
+                        break;
                 }
                 e.Handled = true;
             }
         }
 
-      
     }
 }

@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="800">
+             d:DesignHeight="400" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <!--Using grdStyle for all Datagrids-->
@@ -18,7 +18,7 @@
                 <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
                 <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
                 <Setter Property="Grid.ColumnSpan" Value="2" />
-                <Setter Property="MaxHeight" Value="250" />
+                <Setter Property="MaxHeight" Value="500" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -92,11 +92,13 @@
                                     <MenuItem Header="WMI-Only" >
                                         <MenuItem x:Name="CtxQueryAllApplicationsWMI_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
                                         <MenuItem x:Name="CtxQueryAllApplicationsWMI_full" Header="Query all Applications full" Click="Query_AllApplications" />
+                                        <MenuItem x:Name="CtxRemoveAllAppRevisionsWMI" Header="Remove all AppRevisions" Click="Remove_AllAppRevisions" />
                                     </MenuItem>
                                     <Separator/>
                                     <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
                                         <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_fast" Header="Query all Applications fast" Click="Query_AllApplications" />
                                         <MenuItem x:Name="CtxQueryAllApplicationsCmdlet_full" Header="Query all Applications full" Click="Query_AllApplications" />
+                                        <MenuItem x:Name="CtxRemoveAllAppRevisionsCmdlet" Header="Remove all AppRevisions" Click="Remove_AllAppRevisions" />
                                     </MenuItem>
                                 </ContextMenu>
                             </TabItem.ContextMenu>
@@ -110,7 +112,7 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyApplicationFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <DataGrid x:Name ="GrdApplication" Style="{StaticResource grdStyle}">
+                                    <DataGrid x:Name ="GrdApplication" Style="{StaticResource grdStyle}" SelectionMode="Single">
                                         <DataGrid.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="WMI-Only">
@@ -182,8 +184,8 @@
                                 <ContextMenu>
                                     <MenuItem Header="WMI-Only" >
                                         <MenuItem x:Name="CtxQueryAllCollectionsWMI" Header="Query all Collections" Click="Query_AllCollections" />
-                                        <MenuItem x:Name="CtxQueryAllDeviceCollectionsWMI" Header="Query all Device-Collections" Click="Query_Collection" />
-                                        <MenuItem x:Name="CtxQueryAllUserCollectionsWMI" Header="Query all User-Collections" Click="Query_Collection" />
+                                        <MenuItem x:Name="CtxQueryAllDeviceCollectionsWMI" Header="Query all Device-Collections" Click="Query_AllCollections" />
+                                        <MenuItem x:Name="CtxQueryAllUserCollectionsWMI" Header="Query all User-Collections" Click="Query_AllCollections" />
                                     </MenuItem>
                                     <Separator/>
                                     <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >

@@ -119,11 +119,55 @@ $allApps | Foreach-Object {{$_.Get()}}";
 
         private void Query_AllCollections(object sender, RoutedEventArgs e)
         {
+            var tmpObject = sender as MenuItem;
 
+            switch (tmpObject.Name)
+            {
+                case "CtxQueryAllCollectionsWMI":
+                    {
+                        _logger.WriteLog("Query all Collections WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allColls = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection  -ComputerName {TxtSiteServer.Text}");
+                        break;
+                    }
+                case "CtxQueryAllDeviceCollectionsWMI":
+                    {
+                        _logger.WriteLog("Query all Device-Collections WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allDeviceColls = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection -Filter 'CollectionType=2' -ComputerName {TxtSiteServer.Text}");
+                        break;
+                    }
+                case "CtxQueryAllUserCollectionsWMI":
+                    {
+                        _logger.WriteLog("Query all User-Collections WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allUserColls = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection -Filter 'CollectionType=1' -ComputerName {TxtSiteServer.Text}");
+                        break;
+                    }
+            }
         }
 
         private void Query_Collection(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void Remove_AllAppRevisions(object sender, RoutedEventArgs e)
+        {
+            var tmpObject = sender as MenuItem;
+
+            switch (tmpObject.Name)
+            {
+                case "CtxRemoveAllAppRevisionsWMI":
+                    {
+                        _logger.WriteLog("Remove all AppRevisions WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Application -Filter 'IsLatest = 0' -ComputerName {TxtSiteServer.Text} | Remove-WmiObject -Verbose");
+                        break;
+                    }
+                case "CtxRemoveAllAppRevisionsCmdlet":
+                    {
+                        _logger.WriteLog("Remove all AppRevisions with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"Get-CMApplication -Fast | ForEach-Object {{Get-CMApplicationRevisionHistory -Name $_.LocalizedDisplayname | Remove-CMApplicationRevisionHistory -Force}}");
+                        break;
+                    }         
+            }
 
         }
 
