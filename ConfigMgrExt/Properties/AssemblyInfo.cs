@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ConfigMgrExt")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("ISE Add-On to simplyfy ConfigMgr Scripting")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ConfigMgrExt")]
+[assembly: AssemblyCompany("Chris Niebuhr")]
+[assembly: AssemblyProduct("ConfigMgr Easy Script")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

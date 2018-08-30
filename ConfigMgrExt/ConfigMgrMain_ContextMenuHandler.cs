@@ -129,10 +129,22 @@ $allApps | Foreach-Object {{$_.Get()}}";
                         ISEHelper.AddLine(HostObject, $"$allColls = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection  -ComputerName {TxtSiteServer.Text}");
                         break;
                     }
+                case "CtxQueryAllCollectionsCmdlet":
+                    {
+                        _logger.WriteLog("Query all Collections with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allColls = Get-CMCollection");
+                        break;
+                    }
                 case "CtxQueryAllDeviceCollectionsWMI":
                     {
                         _logger.WriteLog("Query all Device-Collections WMI-Only Template was used");
                         ISEHelper.AddLine(HostObject, $"$allDeviceColls = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection -Filter 'CollectionType=2' -ComputerName {TxtSiteServer.Text}");
+                        break;
+                    }
+                case "CtxQueryAllDeviceCollectionsCmdlet":
+                    {
+                        _logger.WriteLog("Query all Device-Collections with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allDeviceColls = Get-CMDeviceCollection");
                         break;
                     }
                 case "CtxQueryAllUserCollectionsWMI":
@@ -141,12 +153,35 @@ $allApps | Foreach-Object {{$_.Get()}}";
                         ISEHelper.AddLine(HostObject, $"$allUserColls = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection -Filter 'CollectionType=1' -ComputerName {TxtSiteServer.Text}");
                         break;
                     }
+                case "CtxQueryAllUserCollectionsCmdlet":
+                    {
+                        _logger.WriteLog("Query all User-Collections with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allUserColls = Get-CMUserCollection");
+                        break;
+                    }
             }
         }
 
         private void Query_Collection(object sender, RoutedEventArgs e)
         {
+            var tmpObject = sender as MenuItem;
+            var collection = (CMCollection)GrdCollection.SelectedItem;
 
+            switch (tmpObject.Name)
+            {
+                case "CtxQueryCollectionWMI":
+                    {
+                        _logger.WriteLog("Query Collection WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"$coll = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_Collection -Filter \"Name='{collection.Name}'\" -Computername {TxtSiteServer.Text}");
+                        break;
+                    }
+                case "CtxQueryCollectionCmdlet":
+                    {
+                        _logger.WriteLog("Query Collection  with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"$coll = Get-CMCollection -Name '{collection.Name}'");
+                        break;
+                    }
+            }
         }
 
         private void Remove_AllAppRevisions(object sender, RoutedEventArgs e)
@@ -166,11 +201,9 @@ $allApps | Foreach-Object {{$_.Get()}}";
                         _logger.WriteLog("Remove all AppRevisions with ConfigMgr Cmdlet Template was used");
                         ISEHelper.AddLine(HostObject, $"Get-CMApplication -Fast | ForEach-Object {{Get-CMApplicationRevisionHistory -Name $_.LocalizedDisplayname | Remove-CMApplicationRevisionHistory -Force}}");
                         break;
-                    }         
+                    }
             }
-
         }
-
     }
 }
 

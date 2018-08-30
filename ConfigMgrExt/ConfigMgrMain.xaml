@@ -18,7 +18,7 @@
                 <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
                 <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
                 <Setter Property="Grid.ColumnSpan" Value="2" />
-                <Setter Property="MaxHeight" Value="500" />
+                <Setter Property="MaxHeight" Value="300" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -190,8 +190,8 @@
                                     <Separator/>
                                     <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
                                         <MenuItem x:Name="CtxQueryAllCollectionsCmdlet" Header="Query all Collections" Click="Query_AllCollections" />
-                                        <MenuItem x:Name="CtxQueryAllDeviceCollectionsCmdlet" Header="Query all Device-Collections" Click="Query_Collection" />
-                                        <MenuItem x:Name="CtxQueryAllUserCollectionsCmdlet" Header="Query all User-Collections" Click="Query_Collection" />
+                                        <MenuItem x:Name="CtxQueryAllDeviceCollectionsCmdlet" Header="Query all Device-Collections" Click="Query_AllCollections" />
+                                        <MenuItem x:Name="CtxQueryAllUserCollectionsCmdlet" Header="Query all User-Collections" Click="Query_AllCollections" />
                                     </MenuItem>
                                 </ContextMenu>
                             </TabItem.ContextMenu>
@@ -205,14 +205,14 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyCollectionFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <DataGrid x:Name ="GrdCollection" Style="{StaticResource grdStyle}">
+                                    <DataGrid x:Name ="GrdCollection" Style="{StaticResource grdStyle}" SelectionMode="Single" >
                                         <DataGrid.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="WMI-Only">
-
+                                                    <MenuItem x:Name="CtxQueryCollectionWMI" Header="Query Collection" Click="Query_Collection" />
                                                 </MenuItem>
                                                 <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets">
-
+                                                    <MenuItem x:Name="CtxQueryCollectionCmdlet" Header="Query Collection" Click="Query_Collection" />
                                                 </MenuItem>
                                             </ContextMenu>
                                         </DataGrid.ContextMenu>
