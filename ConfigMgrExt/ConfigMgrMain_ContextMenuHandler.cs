@@ -204,6 +204,94 @@ $allApps | Foreach-Object {{$_.Get()}}";
                     }
             }
         }
+
+        private void Query_AllDevices(object sender, RoutedEventArgs e)
+        {
+            var tmpObject = sender as MenuItem;
+            switch(tmpObject.Name)
+            {
+                case "CtxQueryAllDevicesWMI":
+                    {
+                        _logger.WriteLog("Query all Devices WMI-Only Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allDevices = Get-WmiObject -Namespace root\\sms\\site_{TxtblcSiteCode.Text} -Class SMS_CombinedDeviceResources -ComputerName {TxtSiteServer.Text}");
+                        break;
+                    }
+                case "CtxQueryAllDevicesCmdlet":
+                    {
+                        _logger.WriteLog("Query all Devices with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"$allDevices = Get-CMDevice");
+                        break;
+                    }
+            }
+        }
+
+        private void ImportDeviceInformation(object sender, RoutedEventArgs e)
+        {
+            var tmpObject = sender as MenuItem;
+            switch (tmpObject.Name)
+            {
+                case "CtxImportDeviceInformationWMI_SMBIOSGUID":
+                    {
+                        _logger.WriteLog("Import Device Information via SMBIOSGUID WMI-Only Template was used");
+                        var codeFormat = @"$SMSSite = [WMICLASS]""\\{0}\root\sms\Site_{1}:SMS_SITE""
+$params = $SMSSite.GetMethodParameters(""ImportMachineEntry"")
+$params.NetBiosName = ""Pleaser enter NetbiosName here""
+$params.SMBIOSGUID = ""Please enter SMBIOSGUID here""
+$SMSSite.InvokeMethod(""ImportMachineEntry"", $params, $null)
+";
+                        var code = string.Format(codeFormat, TxtSiteServer.Text, TxtblcSiteCode.Text);
+                        ISEHelper.AddLine(HostObject, code);
+                        break;
+                    }
+                case "CtxImportDeviceInformationWMI_MACAddress":
+                    {
+                        _logger.WriteLog("Import Device Information via MAC-Address WMI-Only Template was used");
+                        var codeFormat = @"$SMSSite = [WMICLASS]""\\{0}\root\sms\Site_{1}:SMS_SITE""
+$params = $SMSSite.GetMethodParameters(""ImportMachineEntry"")
+$params.NetBiosName = ""Pleaser enter Netbiosname here""
+$params.MACAddress = ""Please enter MACAdddress here""
+$SMSSite.InvokeMethod(""ImportMachineEntry"", $params, $null)
+";
+                        var code = string.Format(codeFormat, TxtSiteServer.Text, TxtblcSiteCode.Text);
+                        ISEHelper.AddLine(HostObject, code);
+                        break;
+                    }
+                case "CtxImportDeviceInformationCmdlet_MACAddress":
+                    {
+                        _logger.WriteLog("Import Device Information via MAC-Address with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"Import-CMComputerInformation -ComputerName \"Enter NetbiosName here\" -MacAddress \"Enter MAC-Address here\"");
+                        break;
+                    }
+                case "CtxImportDeviceInformationCmdlet_SMBIOSGUID":
+                    {
+                        _logger.WriteLog("Import Device Information via SMBIOSGUID with ConfigMgr Cmdlet Template was used");
+                        ISEHelper.AddLine(HostObject, $"Import-CMComputerInformation -ComputerName \"Enter NetbiosName here\" -SMBiosGuid \"Enter SMBIOSGUID here\"");
+                        break;
+                    }
+            }
+        }
+
+        private void Add_DeviceToCollection(object sender, RoutedEventArgs e)
+        {
+            var tmpObject = sender as MenuItem;
+            var device = (CMDevice)GrdDevices.SelectedItem;
+
+            switch(tmpObject.Name)
+            {
+                case "CtxAddDeviceToCollectionDMCmdlet":
+                    {
+                        _logger.WriteLog("Add Device to Collection via Direct-Membership with ConfigMgr Cmdlet Template was used");
+                        var codeFormat = @"$deviceToAdd = Get-CMDevice -Name {0}
+Get-CMCollection -Name ""Enter Collectionname here"" | Add-CMDeviceCollectionDirectMembershipRule -ResourceId $deviceToAdd.ResourceID
+";
+                        var code = string.Format(codeFormat, device.Name);
+                        ISEHelper.AddLine(HostObject,code);
+                        break;
+                    }
+
+            }
+
+        }
     }
 }
 

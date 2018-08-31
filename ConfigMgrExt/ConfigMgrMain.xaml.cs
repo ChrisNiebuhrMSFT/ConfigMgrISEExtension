@@ -24,7 +24,7 @@ namespace ConfigMgrExt
         private TextBoxLogger _txtLogger;
         private const int MAX_SOFTWAREUPDATECOUNT = 50000; //MAX Number of Softwarepdates for the Softwareupdate Grid
         private string _connectedSite; //stores the current connected Site
-        
+
         public ObjectModelRoot HostObject { get; set; } //Access ISE Hostobject
 
         public ConfigMgrMain()
@@ -57,6 +57,7 @@ namespace ConfigMgrExt
                     _logger.WriteLog($"SiteCode = {siteCode}");
                     _connectedSite = siteServer;
                     SetConnectButton("Connected", false);
+                    _logger.WriteLog($"Connected as ({Environment.UserDomainName}\\{Environment.UserName})");
                     TabMenu.IsEnabled = true;
                 }
                 else
@@ -79,6 +80,7 @@ namespace ConfigMgrExt
         /// <returns></returns>
         private async Task GatherInformation(WQLHelper wqlHelper)
         {
+            _logger.WriteLog("===== Start loading Informations =====");
             _logger.WriteLog("Loading Applicationinformation");
             List<CMApplication> apps = await CMInfoCollector.GetSMSObjectInformation<CMApplication>(wqlHelper, "SMS_Applicationlatest");
             GrdApplication.ItemsSource = apps.ToArray();
@@ -107,7 +109,7 @@ namespace ConfigMgrExt
             _logger.WriteLog("Loading Softwareupdateinformation");
             List<CMSoftwareupdate> sus = await CMInfoCollector.GetSMSObjectInformation<CMSoftwareupdate>(wqlHelper, "SMS_Softwareupdate");
             GrdSoftwareupdate.ItemsSource = sus.Take(MAX_SOFTWAREUPDATECOUNT)
-                                                .ToArray();;
+                                                .ToArray();
             _logger.WriteLog("Softwareupdateinformation successfully loaded");
 
             _logger.WriteLog("Loading SoftwareupdateGroupinformation");
@@ -122,7 +124,7 @@ namespace ConfigMgrExt
 
             _logger.WriteLog("Loading Deploymenttypeinformation");
             List<CMDeploymenttype> dt = await CMInfoCollector.GetSMSObjectInformation<CMDeploymenttype>(wqlHelper, "SMS_Deploymenttype");
-            GrdDeploymenttype.ItemsSource = dt.Where(d => d.IsLatest=="True")
+            GrdDeploymenttype.ItemsSource = dt.Where(d => d.IsLatest == "True")
                                               .ToArray();
             _logger.WriteLog("Deploymenttypeinformation successfully loaded");
 
@@ -135,6 +137,8 @@ namespace ConfigMgrExt
             List<CMOSImage> oi = await CMInfoCollector.GetSMSObjectInformation<CMOSImage>(wqlHelper, "SMS_ImagePackage");
             GrdOSImage.ItemsSource = oi.ToArray();
             _logger.WriteLog("Operatingsystemimageinformation successfully loaded");
+
+            _logger.WriteLog("===== Finished Informationloading =====");
         }
 
         /// <summary>
@@ -279,26 +283,26 @@ namespace ConfigMgrExt
                 switch (s.Name)
                 {
                     case "TxtApplicationFilter":
-                            BtnApplyFilter_Click(BtnApplyApplicationFilter, e);
-                            break;
+                        BtnApplyFilter_Click(BtnApplyApplicationFilter, e);
+                        break;
                     case "TxtPackagesFilter":
                         BtnApplyFilter_Click(BtnApplyPackageFilter, e);
                         break;
                     case "TxtDevicesFilter":
-                            BtnApplyFilter_Click(BtnApplyDevicesFilter, e);
-                            break;
+                        BtnApplyFilter_Click(BtnApplyDevicesFilter, e);
+                        break;
                     case "TxtUserFilter":
-                            BtnApplyFilter_Click(BtnApplyUserFilter, e);
-                            break;
+                        BtnApplyFilter_Click(BtnApplyUserFilter, e);
+                        break;
                     case "TxtCollectionFilter":
-                            BtnApplyFilter_Click(BtnApplyCollectionFilter, e);
-                            break;
+                        BtnApplyFilter_Click(BtnApplyCollectionFilter, e);
+                        break;
                     case "TxtSoftwareupdateFilter":
-                            BtnApplyFilter_Click(BtnApplySoftwareupdateFilter, e);
-                            break;
+                        BtnApplyFilter_Click(BtnApplySoftwareupdateFilter, e);
+                        break;
                     case "TxtSoftwareupdateGroupFilter":
-                            BtnApplyFilter_Click(BtnApplySoftwareupdateGroupFilter, e);
-                            break;
+                        BtnApplyFilter_Click(BtnApplySoftwareupdateGroupFilter, e);
+                        break;
                     case "TxtTasksequenceFilter":
                         BtnApplyFilter_Click(BtnApplyTasksequenceFilter, e);
                         break;
@@ -315,6 +319,5 @@ namespace ConfigMgrExt
                 e.Handled = true;
             }
         }
-
     }
 }

@@ -148,6 +148,21 @@
                         </TabItem>
                         <!--Devices Tab-->
                         <TabItem Header="Devices">
+                            <TabItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="WMI-Only" >
+                                        <MenuItem x:Name="CtxQueryAllDevicesWMI" Header="Query all Devices" Click="Query_AllDevices" />
+                                        <MenuItem x:Name="CtxImportDeviceInformationWMI_SMBIOSGUID" Header="Import Device Informations via SMBIOSGUID" Click="ImportDeviceInformation" />
+                                        <MenuItem x:Name="CtxImportDeviceInformationWMI_MACAddress" Header="Import Device Informations via MAC-Address" Click="ImportDeviceInformation" />
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
+                                        <MenuItem x:Name="CtxQueryAllDevicesCmdlet" Header="Query all Devices" Click="Query_AllDevices" />
+                                        <MenuItem x:Name="CtxImportDeviceInformationCmdlet_SMBIOSGUID" Header="Import Device Informations via SMBIOSGUID" Click="ImportDeviceInformation" />
+                                        <MenuItem x:Name="CtxImportDeviceInformationCmdlet_MACAddress" Header="Import Device Informations via MAC-Address" Click="ImportDeviceInformation" />
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TabItem.ContextMenu>
                             <StackPanel>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -158,7 +173,15 @@
                                     <Button Grid.Column="1" x:Name="BtnApplyDevicesFilter" Margin="5" Content="Apply Filter" Click="BtnApplyFilter_Click"/>
                                 </Grid>
                                 <Grid>
-                                    <DataGrid x:Name ="GrdDevices" Style="{StaticResource grdStyle}"/>
+                                    <DataGrid x:Name ="GrdDevices" Style="{StaticResource grdStyle}">
+                                        <DataGrid.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Style="{StaticResource CtxMenues}" Header="CmdLets" >
+                                                    <MenuItem x:Name="CtxAddDeviceToCollectionDMCmdlet" Header="Add Device to Collection via Direct-Membership" Click="Add_DeviceToCollection" />
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </DataGrid.ContextMenu>
+                                    </DataGrid>
                                 </Grid>
                             </StackPanel>
                         </TabItem>
